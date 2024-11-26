@@ -7,4 +7,5 @@ package com.itheima.mp;
  */
 
 public class MpDemoApplicationTests {
+
 }
