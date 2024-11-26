@@ -13,7 +13,7 @@ import java.util.List;
 /**
  * @Author: Song Laixiong
  * @Create: 2024-11-26
- * @Description:
+ * @Desciption:
  */
 
 @SpringBootTest
@@ -65,4 +65,9 @@ public class UserMapperTest {
         System.out.println("i = " + i);
     }
 
+    @Test
+    void testQuery() {
+        User user = userMapper.queryById(1L);
+        System.out.println("user = " + user);
+    }
 }

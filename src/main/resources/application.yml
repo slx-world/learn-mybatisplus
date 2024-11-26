@@ -10,10 +10,11 @@ logging:
   pattern:
     dateformat: HH:mm:ss
 mybatis-plus:
+  mapper-locations: classpath*:mapper/*.xml # Mapper.xml 文件地址，当前这个是默认值
   type-aliases-package: com.itheima.mp.domain.po
   global-config:
     db-config:
-      id-type: auto
+      id-type: auto # 全局 id 类型为自增长
       logic-delete-field: deleted # 逻辑删除字段
   configuration:
     default-enum-type-handler: com.baomidou.mybatisplus.core.handlers.MybatisEnumTypeHandler

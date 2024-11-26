@@ -5,4 +5,6 @@ import com.itheima.mp.domain.po.User;
 
 public interface UserMapper extends BaseMapper<User> {
 
+    User queryById(Long id);
+
 }
