@@ -14,8 +14,8 @@ import java.io.Serializable;
  * 
  * </p>
  *
- * @author 虎哥
- * @since 2023-07-29
+ * @author Song Laixiong
+ * @since 2024-11-26
  */
 @Data
 @EqualsAndHashCode(callSuper = false)
