@@ -1,5 +1,7 @@
 package com.itheima.mp.mapper;
 
+import com.baomidou.mybatisplus.core.conditions.query.QueryWrapper;
+import com.baomidou.mybatisplus.core.conditions.update.UpdateWrapper;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.po.UserInfo;
 import org.junit.jupiter.api.Test;
@@ -69,5 +71,45 @@ public class UserMapperTest {
     void testQuery() {
         User user = userMapper.queryById(1L);
         System.out.println("user = " + user);
+    }
+
+    @Test
+    void testQueryWrapper() {
+        // 1. 构建查询条件 where name like '%o%' and balance >= 1000
+        QueryWrapper<User> wrapper = new QueryWrapper<User>()
+                .select("id", "Username", "info", "balance")
+                .like("username", "o")
+                .ge("balance", 1000);
+
+        // 2. 查询数据
+        List<User> users = userMapper.selectList(wrapper);
+        users.forEach(System.out::println);
+    }
+
+    @Test
+    void testUpdateByQueryWrapper() {
+        // 1. 构建查询条件 where name = "Jack"
+        QueryWrapper<User> wrapper = new QueryWrapper<User>()
+                .eq("username", "Jack");
+        // 2. 更新数据，user 中非 null 的字段都会作为 set 语句
+        User user = new User();
+        user.setBalance(2000);
+        int i = userMapper.update(user, wrapper);
+        System.out.println("i = " + i);
+    }
+
+    @Test
+    void testUpdateWrapper() {
+        List<Long> ids = Arrays.asList(1L, 2L, 4L);
+
+        // 1. 生成 SQL
+        UpdateWrapper<User> wrapper = new UpdateWrapper<User>()
+                .setSql("balance = balance + 100") // 注意，这里 balance + 100 是一个 SQL 片段
+                .in("id", ids);// 注意，这里 in 中的参数是 Long 类型
+
+        // 2. 更新，注意第一个参数可以给 null，也就是不填更新字段和数据
+        // 而是基于 UpdateWrapper 中的 setSql 来更新
+        int i = userMapper.update(null, wrapper);
+        System.out.println("i = " + i);
     }
 }
