@@ -1,5 +1,7 @@
 package com.itheima.mp.service;
 
+import com.baomidou.mybatisplus.core.metadata.OrderItem;
+import com.baomidou.mybatisplus.extension.plugins.pagination.Page;
 import com.itheima.mp.domain.po.User;
 import com.itheima.mp.domain.po.UserInfo;
 import org.junit.jupiter.api.Test;
@@ -130,5 +132,29 @@ public class UserServiceTest {
                 .eq(id != null, User::getId, id)
                 .eq(username != null, User::getUsername, username)
                 .update();
+    }
+
+    @Test
+    void testPageQuery() {
+        // 1. 分页查询，new Page() 的两个参数分别是：页码，每页记录数
+        Page<User> p = userService.page(new Page<User>(2, 2));
+        // 2. 总条数
+        System.out.println("总条数：" + p.getTotal());
+        // 3. 总页数
+        System.out.println("总页数：" + p.getPages());
+        // 4. 当前页数据
+        List<User> records = p.getRecords();
+        records.forEach(System.out::println);
+    }
+
+    @Test
+    void testPageQuery2() {
+        int pageNo = 1, pageSize = 3;
+        // 分页参数
+        Page<User> page = Page.of(pageNo, pageSize);
+        // 排序参数，通过 OrderItem 来指定
+        page.addOrder(new OrderItem("balance", true));
+        Page<User> page1 = userService.page(page);
+        page1.getRecords().forEach(System.out::println);
     }
 }
