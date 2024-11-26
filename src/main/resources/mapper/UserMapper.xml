@@ -5,4 +5,15 @@
     <select id="queryById" resultType="com.itheima.mp.domain.po.User">
         select * from user where id = #{id}
     </select>
+
+    <select id="queryUserByIdAndAddr" resultType="com.itheima.mp.domain.po.User">
+        select u.*
+        from user u
+        inner join address a on u.id = a.user_id
+        where u.id
+        <foreach collection="ids" separator="," item="id" open="in (" close=")">
+            #{id}
+        </foreach>
+        and a.city = #{city}
+    </select>
 </mapper>

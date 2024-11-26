@@ -140,4 +140,26 @@ public class UserMapperTest {
         // 2. 调用 mapper 的自定义方法，直接传递 wrapper
         userMapper.deductBalanceByIds(500, wrapper);
     }
+
+    @Test
+    void testQueryUserByIdAndAddr() {
+        List<Long> ids = Arrays.asList(1L, 2L, 4L);
+        String city = "北京";
+        List<User> users = userMapper.queryUserByIdAndAddr(ids, city);
+        users.forEach(System.out::println);
+        // List<Address> addresses = userMapper.queryUserByIdAndAddr(ids, city);
+        // addresses.forEach(System.out::println);
+    }
+
+    @Test
+    void testCustomJoinWrapper() {
+        // 1. 准备自定义查询条件
+        QueryWrapper<User> wrapper = new QueryWrapper<User>()
+                .in("u.id", Arrays.asList(1L, 2L, 4L))
+                .eq("a.city", "北京");
+
+        // 2. 调用 mapper 的自定义方法，直接传递 wrapper
+        List<User> users = userMapper.queryUserByWrapper(wrapper);
+        users.forEach(System.out::println);
+    }
 }
