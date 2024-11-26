@@ -16,7 +16,7 @@ import java.util.List;
  * @Description:
  */
 
-@SpringBootTest
+@SpringBootTest(args = "--mpw.key=069b2c60ca43b985")
 public class UserServiceTest {
 
     @Autowired

@@ -2,8 +2,8 @@ spring:
   datasource:
     url: jdbc:mysql://gz-cdb-nkeikls3.sql.tencentcdb.com:56593/mp?useUnicode=true&characterEncoding=UTF-8&autoReconnect=true&serverTimezone=Asia/Shanghai&rewriteBatchedStatements=true
     driver-class-name: com.mysql.cj.jdbc.Driver
-    username: slx
-    password: slx_9920
+    username: mpw:Mrqs2zrsZkFn9+IV3DcvvA== # 密文要以 mpw: 开头
+    password: mpw:zHImF1IjiajAxQxGWWR4WQ== # 密文要以 mpw: 开头
 logging:
   level:
     com.itheima: debug
